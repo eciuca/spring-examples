@@ -1,5 +1,6 @@
 package com.github.eciuca.workshops.spring.examples;
 
+import com.github.eciuca.workshops.spring.examples.beans.MyBean;
 import com.github.eciuca.workshops.spring.examples.config.GreetingsConfig;
 import com.github.eciuca.workshops.spring.examples.noioc.GreetingManager;
 import org.springframework.context.ApplicationContext;
@@ -15,6 +16,9 @@ public class GreetingsWithSpring {
 
         greetingManager.sayHello("en");
         greetingManager.sayHello("ro");
+
+        context.getBean(MyBean.class);
+        context.getBean(MyBean.class);
 
     }
 }
