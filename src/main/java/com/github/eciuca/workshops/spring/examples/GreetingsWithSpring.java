@@ -2,7 +2,6 @@ package com.github.eciuca.workshops.spring.examples;
 
 import com.github.eciuca.workshops.spring.examples.beans.MyBean;
 import com.github.eciuca.workshops.spring.examples.config.GreetingsConfig;
-import com.github.eciuca.workshops.spring.examples.config.GreetingsWithWrongLanguagesConfig;
 import com.github.eciuca.workshops.spring.examples.noioc.GreetingManager;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -12,8 +11,8 @@ public class GreetingsWithSpring {
 
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 
-        context.getEnvironment().setActiveProfiles("wrong");
-        context.register(GreetingsConfig.class, GreetingsWithWrongLanguagesConfig.class);
+        context.getEnvironment().setActiveProfiles("default");
+        context.register(GreetingsConfig.class);
         context.refresh();
 
         GreetingManager greetingManager = context.getBean(GreetingManager.class);
