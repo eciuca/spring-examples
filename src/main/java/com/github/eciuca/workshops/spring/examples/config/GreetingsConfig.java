@@ -5,9 +5,11 @@ import com.github.eciuca.workshops.spring.examples.noioc.GreetingManager;
 import com.github.eciuca.workshops.spring.examples.noioc.GreetingService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Scope;
 
 @Configuration
+@Import(AppConfig.class)
 public class GreetingsConfig {
 
     @Bean
@@ -25,11 +27,4 @@ public class GreetingsConfig {
         return new GreetingService("Salut");
     }
 
-    @Bean(name = "mybean")
-    @Scope("prototype")
-    public MyBean mybean() {
-        MyBean myBean = new MyBean();
-        myBean.setName("world");
-        return myBean;
-    }
 }
