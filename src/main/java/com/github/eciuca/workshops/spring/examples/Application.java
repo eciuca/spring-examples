@@ -1,19 +1,18 @@
 package com.github.eciuca.workshops.spring.examples;
 
 import com.github.eciuca.workshops.spring.examples.beans.MyBean;
+import com.github.eciuca.workshops.spring.examples.config.AppConfig;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Application {
 
     public static void main(String[] args) {
 
-        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
-        MyBean service = (MyBean) context.getBean("myBean");
-        System.out.println(service.getGreeting());
+        MyBean myBean = context.getBean(MyBean.class);
 
-        service.setName("Spring first application");
-        System.out.println(service.getGreeting());
+        System.out.println(myBean.getGreeting());
     }
 }
