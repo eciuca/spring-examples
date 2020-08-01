@@ -1,6 +1,6 @@
 package com.github.eciuca.workshops.spring.examples.noioc;
 
-public class GreetingService {
+public abstract class GreetingService {
 
     private final String greeting;
 
@@ -10,13 +10,5 @@ public class GreetingService {
 
     public void sayHello() {
         System.out.println(greeting);
-    }
-
-    public static GreetingService englishGreetingService() {
-        return new GreetingService("Hello");
-    }
-
-    public static GreetingService romanianGreetingService() {
-        return new GreetingService("Salut");
     }
 }
