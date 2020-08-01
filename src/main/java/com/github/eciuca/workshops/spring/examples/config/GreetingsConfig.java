@@ -24,7 +24,7 @@ public class GreetingsConfig {
         return new GreetingService("Salut");
     }
 
-    @Bean(name = "mybean", initMethod = "defaultIfEmpty", destroyMethod = "destroy")
+    @Bean(name = "mybean")
     public MyBean mybean() {
         MyBean myBean = new MyBean();
         myBean.setName("world");
