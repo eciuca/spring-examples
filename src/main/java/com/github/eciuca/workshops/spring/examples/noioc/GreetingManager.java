@@ -6,15 +6,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class GreetingManager {
 
-    private final EnglishGreetingService enGreetingService;
-    private final RomanianGreetingService roGreetingService;
-    private GreetingService frGreetingService;
-
     @Autowired
-    public GreetingManager(EnglishGreetingService enGreetingService, RomanianGreetingService roGreetingService) {
-        this.enGreetingService = enGreetingService;
-        this.roGreetingService = roGreetingService;
-    }
+    private EnglishGreetingService enGreetingService;
+    @Autowired
+    private RomanianGreetingService roGreetingService;
+
+    private GreetingService frGreetingService;
 
 
     public void sayHello(String language) {
