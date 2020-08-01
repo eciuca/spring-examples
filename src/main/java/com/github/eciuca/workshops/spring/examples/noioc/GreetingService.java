@@ -11,4 +11,12 @@ public class GreetingService {
     public void sayHello() {
         System.out.println(greeting);
     }
+
+    public static GreetingService englishGreetingService() {
+        return new GreetingService("Hello");
+    }
+
+    public static GreetingService romanianGreetingService() {
+        return new GreetingService("Salut");
+    }
 }
