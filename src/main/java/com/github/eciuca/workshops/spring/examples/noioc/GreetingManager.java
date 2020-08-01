@@ -2,11 +2,11 @@ package com.github.eciuca.workshops.spring.examples.noioc;
 
 public class GreetingManager {
 
-    private final EnglishGreetingService enGreetingService;
-    private final RomanianGreetingService roGreetingService;
-    private RomanianGreetingService frGreetingService;
+    private final GreetingService enGreetingService;
+    private final GreetingService roGreetingService;
+    private GreetingService frGreetingService;
 
-    public GreetingManager(EnglishGreetingService enGreetingService, RomanianGreetingService roGreetingService) {
+    public GreetingManager(GreetingService enGreetingService, GreetingService roGreetingService) {
         this.enGreetingService = enGreetingService;
         this.roGreetingService = roGreetingService;
     }
@@ -14,13 +14,15 @@ public class GreetingManager {
 
     public void sayHello(String language) {
         if (language.equals("en")) {
+            System.out.print("greeting in english: ");
             enGreetingService.sayHello();
         } else {
+            System.out.print("greeting in romanian: ");
             roGreetingService.sayHello();
         }
     }
 
-    public void setFrGreetingService(RomanianGreetingService frGreetingService) {
+    public void setFrGreetingService(GreetingService frGreetingService) {
         this.frGreetingService = frGreetingService;
     }
 }
