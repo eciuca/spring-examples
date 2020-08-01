@@ -3,12 +3,14 @@ package com.github.eciuca.workshops.spring.examples.noioc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
+
 @Component
 public class GreetingManager {
 
-    @Autowired
+    @Inject
     private EnglishGreetingService enGreetingService;
-    @Autowired
+    @Inject
     private RomanianGreetingService roGreetingService;
 
     private GreetingService frGreetingService;
