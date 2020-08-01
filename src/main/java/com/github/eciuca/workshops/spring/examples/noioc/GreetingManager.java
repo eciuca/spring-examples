@@ -8,12 +8,18 @@ import javax.inject.Inject;
 @Component
 public class GreetingManager {
 
-    @Inject
-    private EnglishGreetingService enGreetingService;
-    @Inject
-    private RomanianGreetingService roGreetingService;
+    private final EnglishGreetingService enGreetingService;
+    private final RomanianGreetingService roGreetingService;
 
     private GreetingService frGreetingService;
+
+    private int helloCount = 0;
+
+    @Inject
+    public GreetingManager(EnglishGreetingService enGreetingService, RomanianGreetingService roGreetingService) {
+        this.enGreetingService = enGreetingService;
+        this.roGreetingService = roGreetingService;
+    }
 
 
     public void sayHello(String language) {
@@ -24,6 +30,8 @@ public class GreetingManager {
             System.out.print("greeting in romanian: ");
             roGreetingService.sayHello();
         }
+
+        helloCount++;
     }
 
     public void setFrGreetingService(GreetingService frGreetingService) {
