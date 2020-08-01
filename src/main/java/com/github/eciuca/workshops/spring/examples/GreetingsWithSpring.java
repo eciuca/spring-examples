@@ -25,5 +25,7 @@ public class GreetingsWithSpring {
         manager.sayHello("en");
         manager.sayHello("ro");
 
+        System.out.println(myBean1.getGreeting());
+
     }
 }

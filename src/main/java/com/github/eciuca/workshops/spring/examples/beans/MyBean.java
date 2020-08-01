@@ -8,7 +8,16 @@ public class MyBean {
         this.name = name;
     }
 
-    public String sayHello(){
-        return "Hello! " + name;
+    public String getGreeting(){
+        return "Hello, " + name;
+    }
+
+    public void defaultIfEmpty() {
+        System.out.println("Initializing bean...");
+        this.name = "world!";
+    }
+
+    public void destroy() {
+        System.out.println("Destroying bean...");
     }
 }

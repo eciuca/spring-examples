@@ -20,5 +20,7 @@
           factory-method="romanianGreetingService"
     />
 
-    <bean id="mybean" class="com.github.eciuca.workshops.spring.examples.beans.MyBean" scope="prototype"/>
+    <bean id="mybean" class="com.github.eciuca.workshops.spring.examples.beans.MyBean" init-method="defaultIfEmpty" destroy-method="destroy">
+        <property name="name" value="" />
+    </bean>
 </beans>

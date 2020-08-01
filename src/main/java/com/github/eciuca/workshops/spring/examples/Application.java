@@ -11,9 +11,9 @@ public class Application {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 
         MyBean service = (MyBean) context.getBean("myBean");
-        System.out.println(service.sayHello());
+        System.out.println(service.getGreeting());
 
         service.setName("Spring first application");
-        System.out.println(service.sayHello());
+        System.out.println(service.getGreeting());
     }
 }
