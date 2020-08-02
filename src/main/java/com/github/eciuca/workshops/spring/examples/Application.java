@@ -1,9 +1,7 @@
 package com.github.eciuca.workshops.spring.examples;
 
 import com.github.eciuca.workshops.spring.examples.config.AppConfig;
-import com.github.eciuca.workshops.spring.examples.domain.Account;
-import com.github.eciuca.workshops.spring.examples.domain.AccountController;
-import com.github.eciuca.workshops.spring.examples.domain.AccountService;
+import com.github.eciuca.workshops.spring.examples.domain.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -23,6 +21,13 @@ public class Application {
         AccountController controller = context.getBean(AccountController.class);
 
         controller.start();
+    }
 
+    public static void noSpring() {
+        //POJO - plain old java object
+        AccountCsvMapper accountCsvMapper = new AccountCsvMapper();
+        AccountRepository accountRepository = new FileAccountRepository();
+        AccountService service = new MyAccountService();
+        AccountController controller1 = new AccountController();
     }
 }
