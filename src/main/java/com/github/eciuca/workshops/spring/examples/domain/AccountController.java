@@ -67,7 +67,7 @@ public class AccountController {
         System.out.println("0. Exit");
     }
 
-    @PostConstruct
+//    @PostConstruct
     private void init() {
         service.newAccount("RO123", "Emanuel", 100);
     }

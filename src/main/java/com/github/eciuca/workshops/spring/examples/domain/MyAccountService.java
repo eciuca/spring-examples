@@ -1,6 +1,7 @@
 package com.github.eciuca.workshops.spring.examples.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 public class MyAccountService implements AccountService {
 
     @Autowired
+    @Qualifier("file")
     private AccountRepository repository;
 
     public Account newAccount(String iban, String holder, double balance) {
