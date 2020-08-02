@@ -1,4 +1,4 @@
-package com.github.eciuca.workshops.spring.examples;
+package com.github.eciuca.workshops.spring.examples.domain;
 
 public class Account {
 
@@ -28,5 +28,14 @@ public class Account {
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "iban='" + iban + '\'' +
+                ", holder='" + holder + '\'' +
+                ", balance=" + balance +
+                '}';
     }
 }
