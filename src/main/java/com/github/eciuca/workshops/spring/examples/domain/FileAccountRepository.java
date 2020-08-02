@@ -1,5 +1,6 @@
 package com.github.eciuca.workshops.spring.examples.domain;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -20,9 +21,12 @@ public class FileAccountRepository implements AccountRepository {
     @Value("classpath:accounts.csv")
     private Resource accountsFile;
 
+    @Autowired
+    private AccountCsvMapper mapper;
+
     @Override
     public Account save(Account account) {
-        String accountAsCsvLine = accountToCsvLine(account);
+        String accountAsCsvLine = mapper.accountToCsvLine(account);
 
         Path filePath = getResourceAsPath();
         try {
@@ -41,8 +45,8 @@ public class FileAccountRepository implements AccountRepository {
 
         try {
             List<Account> accountList = Files.readAllLines(filePath).stream()
-                    .map(line -> csvLineToAccount(line))
-//                    .map(this::csvLineToAccount)
+                    .map(line -> mapper.csvLineToAccount(line))
+//                    .map(mapper::csvLineToAccount)
                     .collect(Collectors.toList());
 
             return accountList;
@@ -50,21 +54,6 @@ public class FileAccountRepository implements AccountRepository {
             e.printStackTrace();
             throw new RuntimeException("Could not read accounts from csv", e);
         }
-    }
-
-    private String accountToCsvLine(Account account) {
-        return String.format("%s,%s,%f", account.getIban(), account.getHolder(), account.getBalance());
-    }
-
-    private Account csvLineToAccount(String line) {
-        String[] accountProperties = line.split(",");
-
-        Account account = new Account();
-        account.setIban(accountProperties[0]);
-        account.setHolder(accountProperties[1]);
-        account.setBalance(Double.parseDouble(accountProperties[2]));
-
-        return account;
     }
 
     private Path getResourceAsPath() {
