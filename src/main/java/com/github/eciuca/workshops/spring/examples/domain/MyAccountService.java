@@ -1,14 +1,15 @@
 package com.github.eciuca.workshops.spring.examples.domain;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class MyAccountService implements AccountService {
 
-    private List<Account> accountList = new ArrayList<>();
+    @Autowired
+    private AccountRepository repository;
 
     public Account newAccount(String iban, String holder, double balance) {
         Account account = new Account();
@@ -17,12 +18,14 @@ public class MyAccountService implements AccountService {
         account.setHolder(holder);
         account.setBalance(balance);
 
-        accountList.add(account);
+        repository.save(account);
 
         return account;
     }
 
     public void displayAccounts() {
+        List<Account> accountList = repository.findAll();
+
         for (Account account : accountList) {
             System.out.println(account);
         }
