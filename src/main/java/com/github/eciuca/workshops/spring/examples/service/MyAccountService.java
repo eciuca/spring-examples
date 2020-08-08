@@ -1,9 +1,8 @@
 package com.github.eciuca.workshops.spring.examples.service;
 
-import com.github.eciuca.workshops.spring.examples.repository.AccountRepository;
 import com.github.eciuca.workshops.spring.examples.model.Account;
+import com.github.eciuca.workshops.spring.examples.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +11,6 @@ import java.util.List;
 public class MyAccountService implements AccountService {
 
     @Autowired
-    @Qualifier("file")
     private AccountRepository repository;
 
     public Account newAccount(String iban, String holder, double balance) {
@@ -20,7 +18,7 @@ public class MyAccountService implements AccountService {
 
         account.setIban(iban);
         account.setHolder(holder);
-        account.setBalance(balance);
+        account.setAccountBalance(balance);
 
         repository.save(account);
 
@@ -28,7 +26,7 @@ public class MyAccountService implements AccountService {
     }
 
     public void displayAccounts() {
-        List<Account> accountList = repository.findAll();
+        Iterable<Account> accountList = repository.findAll();
 
         for (Account account : accountList) {
             System.out.println(account);

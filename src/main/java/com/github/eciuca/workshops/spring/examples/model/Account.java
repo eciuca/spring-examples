@@ -1,10 +1,24 @@
 package com.github.eciuca.workshops.spring.examples.model;
 
+import javax.persistence.*;
+import java.util.Objects;
+
+@Entity
+@Table(name = "accounts")
 public class Account {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column
     private String iban;
+
+    @Column(name = "account_holder")
     private String holder;
-    private double balance;
+
+    @Column
+    private double accountBalance;
 
     public String getIban() {
         return iban;
@@ -22,12 +36,12 @@ public class Account {
         this.holder = holder;
     }
 
-    public double getBalance() {
-        return balance;
+    public double getAccountBalance() {
+        return accountBalance;
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
+    public void setAccountBalance(double balance) {
+        this.accountBalance = balance;
     }
 
     @Override
@@ -35,7 +49,20 @@ public class Account {
         return "Account{" +
                 "iban='" + iban + '\'' +
                 ", holder='" + holder + '\'' +
-                ", balance=" + balance +
+                ", balance=" + accountBalance +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Account account = (Account) o;
+        return Objects.equals(id, account.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
