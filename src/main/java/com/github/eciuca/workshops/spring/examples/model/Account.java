@@ -1,4 +1,4 @@
-package com.github.eciuca.workshops.spring.examples.domain;
+package com.github.eciuca.workshops.spring.examples.model;
 
 public class Account {
 

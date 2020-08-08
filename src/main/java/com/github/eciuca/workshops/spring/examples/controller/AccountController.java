@@ -1,9 +1,9 @@
-package com.github.eciuca.workshops.spring.examples.domain;
+package com.github.eciuca.workshops.spring.examples.controller;
 
+import com.github.eciuca.workshops.spring.examples.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import javax.annotation.PostConstruct;
 import java.util.Scanner;
 
 @Controller

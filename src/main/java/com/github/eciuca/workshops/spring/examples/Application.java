@@ -1,9 +1,11 @@
 package com.github.eciuca.workshops.spring.examples;
 
-import com.github.eciuca.workshops.spring.examples.config.AppConfig;
-import com.github.eciuca.workshops.spring.examples.domain.*;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import com.github.eciuca.workshops.spring.examples.controller.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * Bank Account Management Application
@@ -12,22 +14,38 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  * - creare cont
  * - afisare lista conturi
  * - salvare lista conturi (in memorie / pe disk)
+ *
+ * Utilizator (UI)
+ *
+ *      PRESENTATION - controller
+ *      BUSINESS     - service
+ *      PERSISTENCE  - repository (Dao, Spring repositories, Jdbc)
+ *      DOMAIN       - model
+ *
+ * Disk
  */
-public class Application {
+@SpringBootApplication
+public class Application implements CommandLineRunner {
+
+    @Value("${environment}")
+    private String environment;
+
+    @Autowired
+    private AccountController controller;
 
     public static void main(String[] args) {
-        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        SpringApplication.run(Application.class, args);
 
-        AccountController controller = context.getBean(AccountController.class);
-
-        controller.start();
     }
 
-    public static void noSpring() {
-        //POJO - plain old java object
-        AccountCsvMapper accountCsvMapper = new AccountCsvMapper();
-        AccountRepository accountRepository = new FileAccountRepository();
-        AccountService service = new MyAccountService();
-        AccountController controller1 = new AccountController();
+    @Override
+    public void run(String... args) throws Exception {
+        boolean isATest = environment.equals("test");
+
+        if (isATest) {
+            System.out.println("This is a test, controller.start() will not be called!");
+        } else {
+            controller.start();
+        }
     }
 }

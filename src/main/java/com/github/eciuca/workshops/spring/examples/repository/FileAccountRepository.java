@@ -1,5 +1,6 @@
-package com.github.eciuca.workshops.spring.examples.domain;
+package com.github.eciuca.workshops.spring.examples.repository;
 
+import com.github.eciuca.workshops.spring.examples.model.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
