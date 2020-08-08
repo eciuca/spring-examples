@@ -17,8 +17,8 @@ public class Account {
     @Column(name = "account_holder")
     private String holder;
 
-    @Column
-    private double accountBalance;
+    @Column(name = "account_balance")
+    private Double balance;
 
     public String getIban() {
         return iban;
@@ -36,12 +36,12 @@ public class Account {
         this.holder = holder;
     }
 
-    public double getAccountBalance() {
-        return accountBalance;
+    public Double getBalance() {
+        return balance;
     }
 
-    public void setAccountBalance(double balance) {
-        this.accountBalance = balance;
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class Account {
         return "Account{" +
                 "iban='" + iban + '\'' +
                 ", holder='" + holder + '\'' +
-                ", balance=" + accountBalance +
+                ", balance=" + balance +
                 '}';
     }
 
