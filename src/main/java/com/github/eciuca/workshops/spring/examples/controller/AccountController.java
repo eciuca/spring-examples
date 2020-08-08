@@ -1,5 +1,6 @@
 package com.github.eciuca.workshops.spring.examples.controller;
 
+import com.github.eciuca.workshops.spring.examples.model.Account;
 import com.github.eciuca.workshops.spring.examples.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,9 @@ public class AccountController {
                 case 2:
                     displayAccountsOption();
                     break;
+                case 3:
+                    searchAccountsOption(scanner);
+                    break;
                 case 0:
                     System.exit(0);
                     break;
@@ -46,7 +50,6 @@ public class AccountController {
         String iban = "RO" + ibanNumber;
 
         System.out.print("Holder: ");
-        scanner.nextLine();
         String accountHolder = scanner.nextLine();
 
         System.out.print("Initial balance: ");
@@ -55,14 +58,27 @@ public class AccountController {
         service.newAccount(iban, accountHolder, accountBalance);
     }
 
+    private void searchAccountsOption(Scanner scanner) {
+        System.out.println("Please provide an iban:");
+        String iban = scanner.nextLine();
+
+        Account account = service.searchByIban(iban);
+
+        System.out.println(account);
+    }
+
     private int readOption(Scanner scanner) {
-        return scanner.nextInt();
+        int option = scanner.nextInt();
+        scanner.nextLine();
+
+        return option;
     }
 
     private void displayMenu() {
         System.out.println("");
         System.out.println("1. New account");
         System.out.println("2. Display accounts");
+        System.out.println("3. Search accounts");
         System.out.println("");
         System.out.println("0. Exit");
     }

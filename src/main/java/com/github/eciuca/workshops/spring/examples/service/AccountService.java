@@ -12,4 +12,6 @@ public interface AccountService {
     Account newAccount(String iban, String holder, double balance);
 
     void displayAccounts();
+
+    Account searchByIban(String iban);
 }

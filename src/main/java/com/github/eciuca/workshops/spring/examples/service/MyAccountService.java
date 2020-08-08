@@ -5,8 +5,6 @@ import com.github.eciuca.workshops.spring.examples.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class MyAccountService implements AccountService {
 
@@ -28,10 +26,21 @@ public class MyAccountService implements AccountService {
     public void displayAccounts() {
         Iterable<Account> accountList = repository.findAll();
 
+        Long totalNoOfAccounts = repository.count();
+
+        System.out.println("Total no of accounts : " + totalNoOfAccounts);
         for (Account account : accountList) {
             System.out.println(account);
         }
 
 //        accountList.forEach(System.out::println);
+    }
+
+    @Override
+    public Account searchByIban(String iban) {
+        if (iban == null || iban.isEmpty()) {
+            throw new IllegalArgumentException("Please provide a non empty iban");
+        }
+        return repository.findByIban(iban);
     }
 }
