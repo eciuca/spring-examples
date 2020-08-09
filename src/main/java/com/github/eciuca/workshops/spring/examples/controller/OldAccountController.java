@@ -8,8 +8,7 @@ import org.springframework.stereotype.Controller;
 import java.util.Optional;
 import java.util.Scanner;
 
-@Controller
-public class AccountController {
+public class OldAccountController {
 
     @Autowired
     private AccountService service;

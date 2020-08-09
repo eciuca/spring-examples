@@ -1,9 +1,5 @@
 package com.github.eciuca.workshops.spring.examples;
 
-import com.github.eciuca.workshops.spring.examples.controller.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -25,27 +21,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Disk
  */
 @SpringBootApplication
-public class Application implements CommandLineRunner {
-
-    @Value("${environment}")
-    private String environment;
-
-    @Autowired
-    private AccountController controller;
+public class Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
-
-    }
-
-    @Override
-    public void run(String... args) throws Exception {
-        boolean isATest = environment.equals("test");
-
-        if (isATest) {
-            System.out.println("This is a test, controller.start() will not be called!");
-        } else {
-            controller.start();
-        }
     }
 }
