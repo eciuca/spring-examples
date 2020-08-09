@@ -28,6 +28,14 @@ public class MyAccountService implements AccountService {
         return account;
     }
 
+    @Override
+    public Account newAccount(Account account) { //DRY - Dont Repeat Yourself
+        int ibanNumber = (int) (Math.random() * 1_000_000);
+        String iban = "RO" + ibanNumber;
+
+        return newAccount(iban, account.getHolder(), account.getBalance());
+    }
+
     public void displayAccounts() {
         Iterable<Account> accountList = repository.findAll();
 
