@@ -1,0 +1,25 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Edit account details</title>
+</head>
+<body>
+<div>
+    <h3>Edit account details page</h3>
+
+    <div>
+        <form th:action="@{/accounts/update/{id}(id=${account.id})}" method="post" th:object="${account}">
+            <label for="iban">IBAN</label>
+            <input type="text" id="iban" th:field="*{iban}" placeholder="IBAN" th:readonly="true">
+            <br />
+            <label for="holder">Holder</label>
+            <input type="text" id="holder" th:field="*{holder}" placeholder="Holder">
+            <br />
+            <label for="balance">Balance</label>
+            <input type="text" id="balance" th:field="*{balance}" placeholder="Balance">
+            <br />
+            <input type="submit" value="Save changes" />
+        </form>
+    </div>
+</div>
+</body>
+</html>
