@@ -16,6 +16,7 @@
                     <th>IBAN</th>
                     <th>Holder</th>
                     <th>Balance</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,6 +24,9 @@
                     <td th:text="${account.iban}"></td>
                     <td th:text="${account.holder}"></td>
                     <td th:text="${account.balance}"></td>
+                    <td>
+                        <a th:href="@{/accounts/delete/{id}(id=${account.id})}">Delete</a>
+                    </td>
                 </tr>
             </tbody>
         </table>

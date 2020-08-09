@@ -6,11 +6,13 @@ import com.github.eciuca.workshops.spring.examples.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class MyAccountService implements AccountService {
 
     @Autowired
@@ -34,6 +36,11 @@ public class MyAccountService implements AccountService {
         String iban = "RO" + ibanNumber;
 
         return newAccount(iban, account.getHolder(), account.getBalance());
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        repository.deleteById(id);
     }
 
     public void displayAccounts() {

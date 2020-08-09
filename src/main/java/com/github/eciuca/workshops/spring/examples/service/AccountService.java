@@ -17,6 +17,8 @@ public interface AccountService {
 
     Account newAccount(Account account);
 
+    void deleteById(Long id);
+
     void displayAccounts();
 
     Optional<Account> searchByIban(String iban);
