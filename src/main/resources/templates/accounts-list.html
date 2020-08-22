@@ -39,8 +39,8 @@
                 <td th:text="${account.holder}"></td>
                 <td th:text="${account.balance}"></td>
                 <td>
-                    <a th:href="@{/accounts/edit/{id}(id=${account.id})}">Edit</a>
-                    <a th:href="@{/accounts/delete/{id}(id=${account.id})}">Delete</a>
+                    <a sec:authorize="hasRole('ROLE_USER')" th:href="@{/accounts/edit/{id}(id=${account.id})}">Edit</a>
+                    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/accounts/delete/{id}(id=${account.id})}">Delete</a>
                 </td>
             </tr>
             </tbody>
