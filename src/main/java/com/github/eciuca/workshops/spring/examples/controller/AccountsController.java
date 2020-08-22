@@ -29,7 +29,7 @@ public class AccountsController {
     //matches agains the url from the browser address bar:
     // http://localhost:8080/conturi
     // http://localhost:8080/accounts
-    @GetMapping({"/accounts"})
+    @GetMapping({"/accounts", "/"})
     public String getAccountsList(Model model) {
         List<Account> accountList = service.getAllAccountsByBalanceDescending();
 

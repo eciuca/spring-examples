@@ -6,7 +6,10 @@
 <body>
 <div>
     <h3>accounts page</h3>
-    <div>
+    <div sec:authorize="isAnonymous()">
+        <a th:href="@{/login}">Login</a>
+    </div>
+    <div sec:authorize="isAuthenticated()">
         <span>
             Hello, <span sec:authentication="name"></span>
             <span sec:authentication="principal.authorities"></span>

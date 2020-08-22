@@ -16,11 +16,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .mvcMatchers("/accounts").permitAll()
+                .mvcMatchers("/accounts", "/").permitAll()
+                .mvcMatchers("/accounts/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login").permitAll()
+                .defaultSuccessUrl("/accounts")
+                .failureForwardUrl("/login?error")
                 .and()
                 .logout();
     }
@@ -35,7 +38,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .roles("USER")
                 .build();
 
+        UserDetails admin = User.withDefaultPasswordEncoder()
+                .username("admin")
+                .password("pass")
+                .roles("USER","ADMIN")
+                .build();
+
         manager.createUser(emanuel);
+        manager.createUser(admin);
 
         return manager;
     }
