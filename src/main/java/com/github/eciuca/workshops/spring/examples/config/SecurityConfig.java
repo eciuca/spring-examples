@@ -18,17 +18,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .mvcMatchers("/accounts", "/").permitAll()
-                .mvcMatchers("/accounts/**").authenticated()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login").permitAll()
-                .defaultSuccessUrl("/accounts")
-                .failureForwardUrl("/login?error")
-                .and()
-                .logout()
-                .logoutSuccessUrl("/login");
+                .anyRequest().permitAll();
     }
 
     @Bean

@@ -20,8 +20,6 @@ public interface AccountRepository extends PagingAndSortingRepository<Account, L
     @Query("Select sum(a.balance) from Account a where a.holder = :holder")
     Double getTotalForAllAccountsByHolder(String holder);
 
-//    List<Account> findAllOrderByBalance();
-
     List<Account> findAll(Sort sort);
 
     List<AccountHolderOnly> findAllByOrderByHolder();
