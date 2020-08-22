@@ -13,9 +13,13 @@ import java.util.Optional;
  */
 public interface AccountService {
 
+    List<Account> getAllAccounts();
+
     Account newAccount(String iban, String holder, double balance);
 
     Account newAccount(Account account);
+
+    Account deposit(Long accountId, Double amount);
 
     void deleteById(Long id);
 

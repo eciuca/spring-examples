@@ -18,6 +18,11 @@ public class MyAccountService implements AccountService {
     @Autowired
     private AccountRepository repository;
 
+    @Override
+    public List<Account> getAllAccounts() {
+        return repository.findAll(Sort.unsorted());
+    }
+
     public Account newAccount(String iban, String holder, double balance) {
         Account account = new Account();
 
@@ -36,6 +41,15 @@ public class MyAccountService implements AccountService {
         String iban = "RO" + ibanNumber;
 
         return newAccount(iban, account.getHolder(), account.getBalance());
+    }
+
+    @Override
+    @Transactional
+    public Account deposit(Long accountId, Double amount) {
+        Account account = repository.findById(accountId).orElseThrow(() -> new RuntimeException("Account not found"));
+        account.setBalance(account.getBalance() + amount);
+
+        return account;
     }
 
     @Override
