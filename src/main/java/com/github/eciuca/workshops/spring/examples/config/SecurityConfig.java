@@ -1,6 +1,7 @@
 package com.github.eciuca.workshops.spring.examples.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
@@ -17,7 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .mvcMatchers("/accounts", "/").permitAll()
-                .mvcMatchers("/accounts/**").hasRole("ADMIN")
+                .mvcMatchers("/accounts/**").authenticated()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -25,7 +27,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/accounts")
                 .failureForwardUrl("/login?error")
                 .and()
-                .logout();
+                .logout()
+                .logoutSuccessUrl("/login");
     }
 
     @Bean

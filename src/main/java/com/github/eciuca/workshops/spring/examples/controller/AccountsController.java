@@ -5,6 +5,7 @@ import com.github.eciuca.workshops.spring.examples.repository.AccountRepository;
 import com.github.eciuca.workshops.spring.examples.service.AccountService;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -70,6 +71,7 @@ public class AccountsController {
         return "accounts-demo"; //the name of the html template
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("/accounts/delete/{id}")
     public String deleteAccount(@PathVariable("id") Long id) {
         service.deleteById(id);
