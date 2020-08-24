@@ -47,7 +47,7 @@ public class MyAccountService implements AccountService {
     @Transactional
     public Account deposit(Long accountId, Double amount) {
         Account account = repository.findById(accountId).orElseThrow(() -> new RuntimeException("Account not found"));
-        account.setBalance(account.getBalance() + amount);
+        account.deposit(amount);
 
         return account;
     }
