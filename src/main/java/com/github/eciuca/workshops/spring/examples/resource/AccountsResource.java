@@ -58,7 +58,7 @@ public class AccountsResource {
     @PutMapping("/{id}")
     public ResponseEntity<Account> updateAccount(@PathVariable Long id, @RequestBody Account account) {
         if (id.equals(account.getId())) {
-            Account savedAcccount = accountRepository.save(account);
+            Account savedAcccount = accountService.updateAccount(account);
 
             return ResponseEntity
                     .status(OK)

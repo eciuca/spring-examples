@@ -19,6 +19,8 @@ public interface AccountService {
 
     Account newAccount(Account account);
 
+    Account updateAccount(Account account);
+
     Account deposit(Long accountId, Double amount);
 
     void deleteById(Long id);

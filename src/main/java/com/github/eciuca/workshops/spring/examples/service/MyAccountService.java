@@ -44,6 +44,18 @@ public class MyAccountService implements AccountService {
     }
 
     @Override
+    public Account updateAccount(Account account) {
+        Account accountFromDB = repository.findById(account.getId())
+                .orElseThrow(() -> new RuntimeException("Account not found"));
+
+        accountFromDB.setHolder(account.getHolder());
+        accountFromDB.setBalance(account.getBalance());
+        accountFromDB.setIban(account.getIban());
+
+        return accountFromDB;
+    }
+
+    @Override
     @Transactional
     public Account deposit(Long accountId, Double amount) {
         Account account = repository.findById(accountId).orElseThrow(() -> new RuntimeException("Account not found"));

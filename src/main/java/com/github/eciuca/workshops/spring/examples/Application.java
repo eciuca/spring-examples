@@ -2,6 +2,15 @@ package com.github.eciuca.workshops.spring.examples;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.auditing.DateTimeProvider;
+import org.springframework.data.domain.AuditorAware;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.TemporalAccessor;
+import java.util.Optional;
 
 /**
  * Bank Account Management Application
@@ -20,6 +29,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  * Disk
  */
+@EnableJpaAuditing
 @SpringBootApplication
 public class Application {
 
@@ -27,5 +37,13 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-    public void tralala() {}
+    @Bean
+    public AuditorAware<String> myAuditorAware() {
+        return () -> Optional.of("anonymous");
+    }
+
+//    @Bean
+    public DateTimeProvider dateTimeProvider() {
+        return () -> Optional.of(LocalDateTime.now());
+    }
 }
