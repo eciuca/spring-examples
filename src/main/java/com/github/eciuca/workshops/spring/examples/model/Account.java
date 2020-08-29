@@ -4,6 +4,7 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.AbstractAuditable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -13,7 +14,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "accounts")
 @EntityListeners(AuditingEntityListener.class)
-public class Account {
+public class Account extends AbstractAuditable<User, Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,18 +28,6 @@ public class Account {
 
     @Column(name = "account_balance")
     private Double balance;
-
-    @CreatedDate
-    private LocalDateTime createdAt;
-
-    @CreatedBy
-    private String createdBy;
-
-    @LastModifiedDate
-    private LocalDateTime lastModifiedAt;
-
-    @LastModifiedBy
-    private String lastModifiedBy;
 
     public Long getId() {
         return id;
@@ -74,22 +63,6 @@ public class Account {
 
     public void deposit(Double amount) {
         this.balance += amount;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public LocalDateTime getLastModifiedAt() {
-        return lastModifiedAt;
-    }
-
-    public String getLastModifiedBy() {
-        return lastModifiedBy;
     }
 
     @Override

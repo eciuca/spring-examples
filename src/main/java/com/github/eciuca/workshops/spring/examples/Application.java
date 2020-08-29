@@ -1,8 +1,12 @@
 package com.github.eciuca.workshops.spring.examples;
 
+import com.github.eciuca.workshops.spring.examples.model.User;
+import com.github.eciuca.workshops.spring.examples.repository.UserRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.event.ApplicationContextInitializedEvent;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.event.EventListener;
 import org.springframework.data.auditing.DateTimeProvider;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
@@ -33,17 +37,18 @@ import java.util.Optional;
 @SpringBootApplication
 public class Application {
 
+    public static final String ANONYMOUS_USER_NAME = "anonymous";
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 
     @Bean
-    public AuditorAware<String> myAuditorAware() {
-        return () -> Optional.of("anonymous");
-    }
-
-//    @Bean
-    public DateTimeProvider dateTimeProvider() {
-        return () -> Optional.of(LocalDateTime.now());
+    public AuditorAware<User> myAuditorAware(UserRepository userRepository) {
+        return () -> {
+            User user = new User();
+            user.setId(1L);
+            return Optional.of(user);
+        };
     }
 }

@@ -2,8 +2,10 @@ package com.github.eciuca.workshops.spring.examples.service;
 
 import com.github.eciuca.workshops.spring.examples.model.Account;
 import com.github.eciuca.workshops.spring.examples.model.AccountHolderOnly;
+import com.github.eciuca.workshops.spring.examples.model.AccountUpdatedEvent;
 import com.github.eciuca.workshops.spring.examples.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +19,8 @@ public class MyAccountService implements AccountService {
 
     @Autowired
     private AccountRepository repository;
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
 
     @Override
     public List<Account> getAllAccounts() {
@@ -51,6 +55,8 @@ public class MyAccountService implements AccountService {
         accountFromDB.setHolder(account.getHolder());
         accountFromDB.setBalance(account.getBalance());
         accountFromDB.setIban(account.getIban());
+
+        applicationEventPublisher.publishEvent(new AccountUpdatedEvent(accountFromDB));
 
         return accountFromDB;
     }
